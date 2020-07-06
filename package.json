@@ -4,7 +4,7 @@
     "description": "A tool for using webgl",
     "main": "src/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "rollup -c"
     },
     "repository": {
         "type": "git",
@@ -20,6 +20,9 @@
         "url": "https://github.com/FelixMo42/webglmonger/issues"
     },
     "homepage": "https://github.com/FelixMo42/webglmonger#readme",
+    "dependencies": {
+        "@rollup/pluginutils": "^3.1.0"
+    },
     "devDependencies": {
         "rollup": "^2.19.0"
     }

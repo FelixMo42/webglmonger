@@ -1,15 +1,13 @@
-const { createFilter } = require("@rollup/pluginutils")
+import { createFilter } from "@rollup/pluginutils"
 
-module.exports = ({include=["*.sv", "*.fs"], exclude}={}) => {
+export default ({include=["**/*.vs", "**/*.fs"], exclude}={}) => {
     const filter = createFilter(include, exclude)
 
     return {
-        name: "string",
+        name: "webgl",
 
         transform(code, id) {
             if ( filter(id) ) {
-                console.log(id)
-
                 return {
                     code: `export default ${JSON.stringify(code)}`,
                     map: { mappings: "" }

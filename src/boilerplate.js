@@ -37,14 +37,14 @@ export function compileShader(gl, shaderType, shaderSource) {
  * @return {!WebGLProgram} A program.
  */
 export function createProgram(gl, vertexShaderSource, fragmentShaderSource) {
-    // create a program.
+    // create a program
     var program = gl.createProgram()
 
-    // attach the shaders.
+    // attach the shaders
     gl.attachShader(program, compileShader(gl, gl.VERTEX_SHADER, vertexShaderSource))
     gl.attachShader(program, compileShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource))
 
-    // link the program.
+    // link the program
     gl.linkProgram(program)
 
     // check if it linked
