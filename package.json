@@ -1,0 +1,26 @@
+{
+    "name": "webglmonger",
+    "version": "0.0.0",
+    "description": "A tool for using webgl",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FelixMo42/webglmonger.git"
+    },
+    "keywords": [
+        "webgl2",
+        "rollup"
+    ],
+    "author": "FelixMo42",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/FelixMo42/webglmonger/issues"
+    },
+    "homepage": "https://github.com/FelixMo42/webglmonger#readme",
+    "devDependencies": {
+        "rollup": "^2.19.0"
+    }
+}
