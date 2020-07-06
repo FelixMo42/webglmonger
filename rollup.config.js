@@ -1,5 +1,5 @@
 import webgl from 'webglmonger/rollup'
-import resolve from '@rollup/plugin-node-resolve'
+import alias from '@rollup/plugin-alias'
 
 export default {
 	input: 'test/index.js',
@@ -12,6 +12,12 @@ export default {
 	watch: { clearScreen: false },
 	plugins: [
 		webgl(),
-		resolve()
+
+		// so that we can include it as if we were a real module
+		alias({
+			entries: {
+				"webglmonger" : "../../webglmonger/src"
+			}
+		}),
 	]
 }

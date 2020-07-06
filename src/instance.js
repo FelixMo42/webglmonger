@@ -1,0 +1,1 @@
+export default document.createElement("canvas").getContext("webgl2")
