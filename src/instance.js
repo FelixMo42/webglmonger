@@ -1,1 +1,1 @@
-export default document.createElement("canvas").getContext("webgl2")
+export default document.getElementById("webglmonger").getContext("webgl2")

@@ -43,8 +43,8 @@ export function createProgram(vertShader, fragShader) {
     var program = gl.createProgram()
 
     // attach the shaders
-    gl.attachShader(program, vertShader) // vertShader(gl, gl.VERTEX_SHADER))
-    gl.attachShader(program, fragShader) // fragShader(gl, gl.FRAGMENT_SHADER))
+    gl.attachShader(program, vertShader)
+    gl.attachShader(program, fragShader)
 
     // link the program
     gl.linkProgram(program)
@@ -80,4 +80,33 @@ export function initAttribute(gl, attribute, array, {size=2, type=gl.FLOAT, norm
 
     // Tell the attribute how to get data out of the buffer
     gl.vertexAttribPointer(attribute, size, type, normalize, stride, offset)
+}
+
+/**
+ * Makes sure that the canvas has the right pixel density
+ * 
+ * @param {HTMLCanvasElement} canvas 
+ */
+export function resizeCanvas(canvas) {
+    // Lookup the size the browser is displaying the canvas.
+    var displayWidth  = canvas.clientWidth
+    var displayHeight = canvas.clientHeight
+
+    // Check if the canvas is not the same size.
+    if (canvas.width  !== displayWidth || canvas.height !== displayHeight) {
+        // Make the canvas the same size
+        canvas.width  = displayWidth
+        canvas.height = displayHeight
+    }
+}
+
+/**
+ * makes sure the gl canvas is the right scale and set the viewport
+ *
+ * @param {!WebGLRenderingContext} gl The WebGL context.
+ */
+export function resizeGlCanvas(gl) {
+    resizeCanvas(gl.canvas)
+
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
 }

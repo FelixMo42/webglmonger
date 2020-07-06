@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "description": "A tool for using webgl",
     "exports": {
+        ".": "./src/instance.js",
         "./package.json": "./package.json",
         "./rollup": "./src/rollup/index.cjs",
         "./boilerplate": "./src/boilerplate.js"

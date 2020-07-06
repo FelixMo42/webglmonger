@@ -4,7 +4,7 @@ import alias from '@rollup/plugin-alias'
 export default {
 	input: 'test/index.js',
 	output: {
-		sourcemap: true,
+		sourcemap: false,
 		format: 'iife',
 		name: 'app',
 		file: 'tmp/bundle.js'
