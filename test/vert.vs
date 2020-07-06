@@ -14,8 +14,8 @@ void main() {
     // set the location of the vertex in 3d space
     gl_Position = vec4(
         (u_shape.x + u_shape.z * a_position.x) / u_resolution.x,
-        (u_shape.y - u_shape.w * a_position.y) / u_resolution.y
-    , 0, 1);
+        (u_shape.y - u_shape.w * a_position.y) / u_resolution.y,
+    0, 1);
 
     // pass the texcoord to the fragment shader.
     v_texcoord = a_position;

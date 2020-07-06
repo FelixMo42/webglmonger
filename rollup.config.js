@@ -1,4 +1,5 @@
-import webgl from './src/rollup'
+import webgl from 'webglmonger/rollup'
+import resolve from '@rollup/plugin-node-resolve'
 
 export default {
 	input: 'test/index.js',
@@ -11,5 +12,6 @@ export default {
 	watch: { clearScreen: false },
 	plugins: [
 		webgl(),
+		resolve()
 	]
 }

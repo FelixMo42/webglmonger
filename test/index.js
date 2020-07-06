@@ -1,6 +1,6 @@
 import frag from "./frag.fs"
 import vert from "./vert.vs"
 
-import {  } from "../src/boilerplate"
+import { createProgram } from "webglmonger/boilerplate"
 
-console.log(frag, vert)
+createProgram(frag, vert)

@@ -6,7 +6,7 @@
  * @param {number} shaderType The type of shader, VERTEX_SHADER or FRAGMENT_SHADER.
  * @return {!WebGLShader} The shader.
  */
-export function compileShader(gl, shaderType, shaderSource) {
+export const createShader = (shaderSource, shaderType) => (gl) => {
     // Create the shader object
     var shader = gl.createShader(shaderType)
    
@@ -32,17 +32,17 @@ export function compileShader(gl, shaderType, shaderSource) {
  * Creates a program from 2 shaders.
  *
  * @param {!WebGLRenderingContext} gl The WebGL context.
- * @param {!string} vertexShader A vertex shader.
- * @param {!string} fragmentShader A fragment shader.
+ * @param {!string} vertShader A vertex shader.
+ * @param {!string} fragShader A fragment shader.
  * @return {!WebGLProgram} A program.
  */
-export function createProgram(gl, vertexShaderSource, fragmentShaderSource) {
+export function createProgram(gl, vertShader, fragShader) {
     // create a program
     var program = gl.createProgram()
 
     // attach the shaders
-    gl.attachShader(program, compileShader(gl, gl.VERTEX_SHADER, vertexShaderSource))
-    gl.attachShader(program, compileShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource))
+    gl.attachShader(program, vertShader(gl)) //compileShader(gl, gl.VERTEX_SHADER, vertexShaderSource))
+    gl.attachShader(program, fragShader(gl)) //compileShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource))
 
     // link the program
     gl.linkProgram(program)
