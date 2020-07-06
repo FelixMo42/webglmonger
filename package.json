@@ -8,29 +8,14 @@
         "./rollup": "./src/rollup/index.cjs",
         "./boilerplate": "./src/boilerplate.js"
     },
-    "type": "module",
-    "scripts": {
-        "build": "rollup -c"
-    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/FelixMo42/webglmonger.git"
     },
-    "keywords": [
-        "webgl2",
-        "rollup"
-    ],
     "author": "FelixMo42",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/FelixMo42/webglmonger/issues"
     },
-    "homepage": "https://github.com/FelixMo42/webglmonger#readme",
-    "dependencies": {
-        "@rollup/pluginutils": "^3.1.0"
-    },
-    "devDependencies": {
-        "@rollup/plugin-alias": "^3.1.1",
-        "rollup": "^2.19.0"
-    }
+    "homepage": "https://github.com/FelixMo42/webglmonger#readme"
 }

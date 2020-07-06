@@ -1,5 +1,5 @@
 const { createFilter } = require("@rollup/pluginutils")
-const getUniforms = require("./parser.cjs")
+const getUniforms = require("./parser.js")
 
 // constants representing the type of the shaders
 const VERT_SHADER = 35633
@@ -17,7 +17,7 @@ module.exports = () => {
             if ( isVectShader(id) ) {
                 return {
                     code: `
-                        import { createShader } from 'webglmonger/boilerplate'
+                        import { createShader } from 'webglmonger/src/boilerplate'
 
                         export default createShader(${JSON.stringify(code)}, ${VERT_SHADER})
                     `,
@@ -28,7 +28,7 @@ module.exports = () => {
             if ( isFragShader(id) ) {
                 return {
                     code: `
-                        import { createShader } from 'webglmonger/boilerplate'
+                        import { createShader } from 'webglmonger/src/boilerplate'
 
                         export default createShader(${JSON.stringify(code)}, ${FRAG_SHADER})
                     `,
@@ -44,8 +44,8 @@ module.exports = () => {
 
                 return {
                     code: `
-                        import { createProgram } from 'webglmonger/boilerplate'
-                        import gl from 'webglmonger/instance.js'
+                        import { createProgram } from 'webglmonger/src/boilerplate'
+                        import gl from 'webglmonger/src/instance'
 
                         import vert from '${vert}'
                         import frag from '${frag}'

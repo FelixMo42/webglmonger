@@ -1,8 +1,8 @@
 import program, {screenResolution, spriteShape} from "./main.glm"
-import { initAttribute } from "webglmonger/boilerplate"
-import { resizeGlCanvas } from "webglmonger/canvas.js"
-import { loadTexture } from "webglmonger/texture.js"
-import gl from "webglmonger/instance.js"
+import { initAttribute } from "webglmonger/src/boilerplate"
+import { resizeGlCanvas } from "webglmonger/src/canvas"
+import { loadTexture } from "webglmonger/src/texture"
+import gl from "webglmonger"
 
 const vao = gl.createVertexArray()
 gl.bindVertexArray(vao)

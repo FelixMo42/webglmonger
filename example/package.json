@@ -1,0 +1,13 @@
+{
+    "name": "example",
+    "private": true,
+    "scripts": {
+        "build": "rollup -c"
+    },
+    "dependencies": {
+        "@rollup/plugin-node-resolve": "^8.1.0",
+        "rollup": "^2.19.0",
+        "rollup-plugin-webglmonger": "^0.0.0",
+        "webglmonger": "^0.0.0"
+    }
+}
