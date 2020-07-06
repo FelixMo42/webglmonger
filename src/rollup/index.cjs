@@ -8,7 +8,7 @@ const FRAG_SHADER = 35632
 module.exports = () => {
     const isVectShader = createFilter("**/*.vs")
     const isFragShader = createFilter("**/*.fs")
-    const isProgram    = createFilter("**/*.vf")
+    const isProgram    = createFilter("**/*.glm")
 
     return {
         name: "webglmonger",
