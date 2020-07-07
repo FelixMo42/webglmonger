@@ -2,12 +2,12 @@ import {
     setScreenResolution,
     setSpriteShape,
     setVertexPosition,
-    setTexture
+    setTexture,
+    loadTexture,
+    gl
 } from "./prog/main.glm"
 
-import { resizeGlCanvas } from "webglmonger/src/canvas"
-import { loadTexture } from "webglmonger/src/texture"
-import gl from "webglmonger"
+import { resizeGlCanvas } from "rollup-plugin-webglmonger/src/canvas"
 
 // set up the attributes that are passed to the vertex shader
 setVertexPosition(new Float32Array([

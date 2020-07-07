@@ -15,13 +15,13 @@ module.exports = () => ({
 
     transform(code, id) {
         if ( isVectShader(id) ) return `
-            import { createShader } from 'webglmonger/src/boilerplate'
+            import { createShader } from 'rollup-plugin-webglmonger/src/boilerplate'
 
             export default createShader(${JSON.stringify(code)}, ${VERT_SHADER})
         `
 
         if ( isFragShader(id) ) return `
-            import { createShader } from 'webglmonger/src/boilerplate'
+            import { createShader } from 'rollup-plugin-webglmonger/src/boilerplate'
 
             export default createShader(${JSON.stringify(code)}, ${FRAG_SHADER})
         `
@@ -33,8 +33,10 @@ module.exports = () => ({
             let frag = elements["#frag"]
 
             return `
-                import { createProgram } from 'webglmonger/src/boilerplate'
-                import gl from 'webglmonger/src/instance'
+                import { createProgram } from 'rollup-plugin-webglmonger/src/boilerplate'
+                import gl from 'rollup-plugin-webglmonger/src/instance'
+
+                export { gl }
 
                 import vert from '${vert}'
                 import frag from '${frag}'
@@ -49,6 +51,31 @@ module.exports = () => ({
 
                 // tell gl to use our program by default
                 useProgram()
+
+                export function loadTexture(src, callback=() => {}) {
+                    // create a texture
+                    var texture = gl.createTexture()
+
+                    // use texture unit 0
+                    gl.activeTexture(gl.TEXTURE0 + 0)
+                    
+                    // fill the texture with a 1x1 blue pixel so we can use it immediately
+                    gl.bindTexture(gl.TEXTURE_2D, texture)
+                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]))
+
+                    // asynchronously load an image
+                    var image = new Image()
+                    image.src = src
+                    image.addEventListener('load', function() {
+                        gl.bindTexture(gl.TEXTURE_2D, texture)
+                        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
+                        gl.generateMipmap(gl.TEXTURE_2D)
+
+                        callback(texture)
+                    })
+
+                    return texture
+                }
 
                 export default program
             `
