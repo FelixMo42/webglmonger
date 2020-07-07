@@ -1,1 +1,0 @@
-export default document.getElementById("webglmonger").getContext("webgl2")

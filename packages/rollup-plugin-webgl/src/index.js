@@ -11,17 +11,17 @@ const isFragShader = createFilter("**/*.fs")
 const isProgram    = createFilter("**/*.glm")
 
 module.exports = () => ({
-    name: "webglmonger",
+    name: "webgl",
 
     transform(code, id) {
         if ( isVectShader(id) ) return `
-            import { createShader } from 'rollup-plugin-webglmonger/src/boilerplate'
+            import { createShader } from 'rollup-plugin-webgl/src/boilerplate'
 
             export default createShader(${JSON.stringify(code)}, ${VERT_SHADER})
         `
 
         if ( isFragShader(id) ) return `
-            import { createShader } from 'rollup-plugin-webglmonger/src/boilerplate'
+            import { createShader } from 'rollup-plugin-webgl/src/boilerplate'
 
             export default createShader(${JSON.stringify(code)}, ${FRAG_SHADER})
         `
@@ -33,8 +33,8 @@ module.exports = () => ({
             let frag = elements["#frag"]
 
             return `
-                import { createProgram } from 'rollup-plugin-webglmonger/src/boilerplate'
-                import gl from 'rollup-plugin-webglmonger/src/instance'
+                import { createProgram } from 'rollup-plugin-webgl/src/boilerplate'
+                import gl from 'rollup-plugin-webgl/src/instance'
 
                 export { gl }
 

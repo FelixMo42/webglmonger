@@ -7,6 +7,6 @@
     "dependencies": {
         "@rollup/plugin-node-resolve": "^8.1.0",
         "rollup": "^2.19.0",
-        "rollup-plugin-webglmonger": "^0.0.0"
+        "rollup-plugin-webgl": "^0.0.0"
     }
 }

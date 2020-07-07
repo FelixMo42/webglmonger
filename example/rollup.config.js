@@ -1,4 +1,4 @@
-import webgl from 'rollup-plugin-webglmonger'
+import webgl from 'rollup-plugin-webgl'
 import resolve from '@rollup/plugin-node-resolve'
 
 export default {

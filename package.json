@@ -1,21 +1,15 @@
 {
-    "name": "webglmonger",
+    "name": "webgl",
     "version": "0.0.0",
     "description": "A tool for using webgl",
-    "exports": {
-        ".": "./src/instance.js",
-        "./package.json": "./package.json",
-        "./rollup": "./src/rollup/index.cjs",
-        "./boilerplate": "./src/boilerplate.js"
-    },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/FelixMo42/webglmonger.git"
+        "url": "git+https://github.com/FelixMo42/webgl.git"
     },
     "author": "FelixMo42",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/FelixMo42/webglmonger/issues"
+        "url": "https://github.com/FelixMo42/webgl/issues"
     },
-    "homepage": "https://github.com/FelixMo42/webglmonger#readme"
+    "homepage": "https://github.com/FelixMo42/webgl#readme"
 }

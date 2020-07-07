@@ -7,7 +7,7 @@ import {
     gl
 } from "./prog/main.glm"
 
-import { resizeGlCanvas } from "rollup-plugin-webglmonger/src/canvas"
+import { resizeGlCanvas } from "rollup-plugin-webgl/src/canvas"
 
 // set up the attributes that are passed to the vertex shader
 setVertexPosition(new Float32Array([
