@@ -45,6 +45,11 @@ module.exports = () => ({
                 ${ getUniforms(id, vert).map(makeUniform).join("\n") }
                 ${ getUniforms(id, frag).map(makeUniform).join("\n") }
 
+                export const useProgram = () => gl.useProgram(program)
+
+                // tell gl to use our program by default
+                useProgram()
+
                 export default program
             `
         }

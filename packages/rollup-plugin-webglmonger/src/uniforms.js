@@ -9,16 +9,18 @@ const TEXTURE_3D = 32879
 const WebGlNumberType = (base, size) => ({
     base, size, isSampler:false,
 
-    uniformSetFunction(name) {
-        return `uniform${size}${base == FLOAT ? "f" : "i"}v(${name}, value)`
+    uniformSetFunction(loc) {
+        return `gl.uniform${size}${base == FLOAT ? "f" : "i"}v(${loc}, value)`
     }
 })
 
-const WebGlSamplerType = (type) => ({
-    type, isSampler:true,
+// gl.bindTexture(gl.TEXTURE_2D, sprite.texture)
 
-    uniformSetFunction(name) {
-        return `setTexture(${type}, ${name})`
+const WebGlSamplerType = (base) => ({
+    base, isSampler:true,
+
+    uniformSetFunction() {
+        return `gl.bindTexture(${base}, value)`
     }
 })
 
@@ -42,16 +44,14 @@ const types = {
     "sampler3D" : WebGlSamplerType(TEXTURE_3D)
 }
 
-const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+const cleanName = (string) => string[1] == "_" ?  string.slice(2) : string
+const capitalized = (string) => cleanName(string).charAt(0).toUpperCase() + cleanName(string).slice(1)
 
-const makeUniform = ([type, name]) => {
-    // console.log(type)
-    return `
-        export const ${name} = gl.getUniformLocation(program, '${name}')
+const makeUniform = ([type, name]) => `
+    export const ${cleanName(name)} = gl.getUniformLocation(program, '${name}')
 
-        export const set${capitalize(name)} = (value) => gl.${types[type].uniformSetFunction(name)}
-    `
-}
+    export const set${capitalized(name)} = (value) => ${types[type].uniformSetFunction(cleanName(name))}
+`
 
 const makeAttrabute = ([type, name]) => {
     if ( types[type].isSampler ) return ``
@@ -59,20 +59,18 @@ const makeAttrabute = ([type, name]) => {
     return `
         export const ${name} = gl.getAttribLocation(program, '${name}')
 
-        // export const enable${capitalize(name)} = () => 
-
-        export const set${capitalize(name)} = (value, {normalize=false, stride=0, offset=0}={}) => {
+        export const set${capitalized(name)} = (value, {normalize=false, stride=0, offset=0, usage=gl.STATIC_DRAW}={}) => {
             gl.enableVertexAttribArray(${name})
 
             // create a new buffer for the values of the attribute
             gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
 
             // set those values
-            gl.bufferData(gl.ARRAY_BUFFER, value, gl.STATIC_DRAW)
+            gl.bufferData(gl.ARRAY_BUFFER, value, usage)
 
             // Tell the attribute how to get data out of the buffer
             gl.vertexAttribPointer(
-                ${name},
+                ${cleanName(name)},
                 ${types[type].size},
                 ${types[type].base},
                 normalize,
@@ -82,19 +80,5 @@ const makeAttrabute = ([type, name]) => {
         }
     `
 }
-
-// function initAttribute(attribute, array, {size=2, type=gl.FLOAT, normalize=false, stride=0, offset=0}={}) {
-//     // turn on the attribute
-//     gl.enableVertexAttribArray(attribute)
-
-//     // create a new buffer for the values of the attribute
-//     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
-
-//     // set those values
-//     gl.bufferData(gl.ARRAY_BUFFER, array, gl.STATIC_DRAW)
-
-//     // Tell the attribute how to get data out of the buffer
-//     gl.vertexAttribPointer(attribute, size, type, normalize, stride, offset)
-// }
 
 module.exports = { makeUniform, makeAttrabute }
