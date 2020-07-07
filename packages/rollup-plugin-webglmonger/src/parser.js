@@ -30,7 +30,7 @@ function skipUntil(index, buffer, condition) {
 const readWord = (index, buffer) => readWhile(skipUntil(index, buffer, isNotEmptySpace), buffer, isNotEmptySpace)
 const skipWord = (index, buffer) => index + readWord(index, buffer).length + 1
 
-module.exports = function getUniforms(root, file) {
+const getAllOfType = (root, file, type) => {
     // load the file we want to get the uniforms from
     let code = fs.readFileSync( path.resolve(root, "..", file) )
 
@@ -39,20 +39,25 @@ module.exports = function getUniforms(root, file) {
     let uniforms = []
 
     while (true) {
-        index = code.indexOf("uniform", index)
+        index = code.indexOf(type, index)
 
         if ( index == -1 ) break
 
-        // skip over "uniform <type>"
         index = skipWord(index, code)
-        index = skipWord(index, code)
+
+        let t = readWord(index, code)
+        index += t.length + 1
 
         let uniform = readWord(index, code)
+        index += uniform.length + 1
 
-        index += uniform.length
-
-        uniforms.push(uniform)
+        uniforms.push([t, uniform])
     }
 
     return uniforms
 }
+
+const getUniforms = (root, file) => getAllOfType(root, file, "\nuniform ")
+const getAttributes = (root, file) => getAllOfType(root, file, "\nin ")
+
+module.exports = { getUniforms, getAttributes }

@@ -1,5 +1,5 @@
 {
-    "name" : "webglmonger",
+    "name": "webglmonger",
     "version": "0.0.0",
     "main": "src/index.js"
 }

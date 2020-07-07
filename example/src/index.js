@@ -1,4 +1,8 @@
-import program, {screenResolution, spriteShape} from "./main.glm"
+import program, {
+    setScreenResolution,
+    setSpriteShape,
+    vertexPosition
+} from "./prog/main.glm"
 import { initAttribute } from "webglmonger/src/boilerplate"
 import { resizeGlCanvas } from "webglmonger/src/canvas"
 import { loadTexture } from "webglmonger/src/texture"
@@ -8,7 +12,7 @@ const vao = gl.createVertexArray()
 gl.bindVertexArray(vao)
 
 // set up the attributes that are passed to the vertex shader
-initAttribute(gl, gl.getAttribLocation(program, "a_position"), new Float32Array([
+initAttribute(vertexPosition, new Float32Array([
     1,1 , 1,0 , 0,0 ,
     1,1 , 0,1 , 0,0 ,
 ]))
@@ -29,14 +33,14 @@ function render() {
     gl.bindVertexArray(vao)
 
     // pass in the canvas resolution so we can convert from pixels to clipspace in the shader
-    gl.uniform2f(screenResolution, gl.canvas.width / 2, gl.canvas.height / 2)
+    setScreenResolution(new Float32Array([gl.canvas.width / 2, gl.canvas.height / 2]))
 
     for (let sprite of scene) {
         // use the texture we want
         gl.bindTexture(gl.TEXTURE_2D, sprite.texture)
 
         // pass in the shape of the sprite
-        gl.uniform4fv(spriteShape, sprite.shape)
+        setSpriteShape(sprite.shape)
 
         // draw the shape
         gl.drawArrays(gl.TRIANGLES, 0, 6)

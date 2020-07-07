@@ -8,7 +8,7 @@ import gl from "./instance.js"
  * @param {number} shaderType The type of shader, VERTEX_SHADER or FRAGMENT_SHADER.
  * @return {!WebGLShader} The shader.
  */
-export const createShader = (shaderSource, shaderType) => {
+export function createShader(shaderSource, shaderType) {
     // create the shader object
     var shader = gl.createShader(shaderType)
    
@@ -68,7 +68,7 @@ export function createProgram(vertShader, fragShader) {
  * @param {number} stride 0 = move forward size * sizeof(type) each iteration to get the next position
  * @param {number} offset where to start in the buffer
  */
-export function initAttribute(gl, attribute, array, {size=2, type=gl.FLOAT, normalize=false, stride=0, offset=0}={}) {
+export function initAttribute(attribute, array, {size=2, type=gl.FLOAT, normalize=false, stride=0, offset=0}={}) {
     // turn on the attribute
     gl.enableVertexAttribArray(attribute)
 
