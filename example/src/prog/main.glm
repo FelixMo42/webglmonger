@@ -1,2 +1,4 @@
-#vert ./vert.vs
-#frag ./frag.fs
+vert ./vert.vs
+frag ./frag.fs
+
+canvas #webgl

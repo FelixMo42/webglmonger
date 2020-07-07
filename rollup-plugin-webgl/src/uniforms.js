@@ -1,5 +1,3 @@
-// map from glsl type to corresponding function to set it
-
 const FLOAT = 5126
 const INT   = 5124
 

@@ -15,13 +15,13 @@ module.exports = () => ({
 
     transform(code, id) {
         if ( isVectShader(id) ) return `
-            import { createShader } from 'rollup-plugin-webgl/src/boilerplate'
+            import { createShader } from 'rollup-plugin-webgl/lib/boilerplate'
 
             export default createShader(${JSON.stringify(code)}, ${VERT_SHADER})
         `
 
         if ( isFragShader(id) ) return `
-            import { createShader } from 'rollup-plugin-webgl/src/boilerplate'
+            import { createShader } from 'rollup-plugin-webgl/lib/boilerplate'
 
             export default createShader(${JSON.stringify(code)}, ${FRAG_SHADER})
         `
@@ -29,28 +29,28 @@ module.exports = () => ({
         if ( isProgram(id) ) {
             let elements = Object.fromEntries(code.split("\n").map(attr => attr.split(" ")))
 
-            let vert = elements["#vert"]
-            let frag = elements["#frag"]
+            let vert = elements["vert"]
+            let frag = elements["frag"]
+            let canvas = elements["canvas"]
 
             return `
-                import { createProgram } from 'rollup-plugin-webgl/src/boilerplate'
-                import gl from 'rollup-plugin-webgl/src/instance'
+                import { createProgram } from 'rollup-plugin-webgl/lib/boilerplate'
+                
+                export const gl = document.querySelector('${canvas}').getContext("webgl2")
 
-                export { gl }
+                import vertSource from '${vert}'
+                import fragSource from '${frag}'
 
-                import vert from '${vert}'
-                import frag from '${frag}'
-
-                const program = createProgram(vert, frag)
-
-                ${ getAttributes(id, vert).map(makeAttrabute).join("\n") }
-                ${ getUniforms(id, vert).map(makeUniform).join("\n") }
-                ${ getUniforms(id, frag).map(makeUniform).join("\n") }
+                export const program = createProgram(gl, vertSource(gl), fragSource(gl))
 
                 export const useProgram = () => gl.useProgram(program)
 
                 // tell gl to use our program by default
                 useProgram()
+
+                ${ getAttributes(id, vert).map(makeAttrabute).join("\n") }
+                ${ getUniforms(id, vert).map(makeUniform).join("\n") }
+                ${ getUniforms(id, frag).map(makeUniform).join("\n") }
 
                 export function loadTexture(src, callback=() => {}) {
                     // create a texture
