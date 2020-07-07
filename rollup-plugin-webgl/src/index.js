@@ -27,7 +27,9 @@ module.exports = () => ({
         `
 
         if ( isProgram(id) ) {
-            let parameters = Object.fromEntries(code.split("\n").map(attr => attr.split(" ")))
+            let parameters = require("./glp")(code)
+
+            console.log(parameters)
 
             let data = {
                 parameters,

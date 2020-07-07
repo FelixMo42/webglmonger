@@ -1,9 +1,9 @@
-(vert ./vert.vert)
-(frag ./frag.frag)
+@vert ./vert.vert
+@frag ./frag.frag
 
-(canvas #webgl)
+@canvas #webgl
 
-(inculde [
+@inculde [
     loadTexture
     resizeCanvas
-])
+]
