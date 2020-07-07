@@ -51,7 +51,7 @@ const makeUniform = ([type, name]) => `
     export const set${capitalized(name)} = (value) => ${types[type].uniformSetFunction(cleanName(name))}
 `
 
-const makeAttrabute = ([type, name]) => {
+const makeAttribute = ([type, name]) => {
     if ( types[type].isSampler ) return ``
 
     return `
@@ -79,4 +79,4 @@ const makeAttrabute = ([type, name]) => {
     `
 }
 
-module.exports = { makeUniform, makeAttrabute }
+module.exports = { makeUniform, makeAttribute }

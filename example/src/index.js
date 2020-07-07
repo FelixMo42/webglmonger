@@ -1,10 +1,10 @@
 import {
-    prepare,
+    resizeCanvas,
     setScreenResolution,
     setSpriteShape, 
     setVertexPosition,
     setTexture, loadTexture,
-} from "./prog/main.glm"
+} from "./prog/main.glp"
 
 // set up the attributes that are passed to the vertex shader
 setVertexPosition(new Float32Array([
@@ -27,7 +27,7 @@ scene.push( Sprite(texture2, 100, 100, 100, 100) )
 // render()
 
 const render = () => {
-    let gl = prepare()
+    let gl = resizeCanvas()
 
     // clear the canvas
     gl.clearColor(0, 0, 0, 1)

@@ -1,4 +1,0 @@
-vert ./vert.vs
-frag ./frag.fs
-
-canvas #webgl
