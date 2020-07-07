@@ -34,7 +34,7 @@ module.exports = () => ({
             let canvas = elements["canvas"]
 
             return `
-                import { createProgram } from 'rollup-plugin-webgl/lib/boilerplate'
+                import { createProgram, resizeCanvas } from 'rollup-plugin-webgl/lib/boilerplate'
                 
                 export const gl = document.querySelector('${canvas}').getContext("webgl2")
 
@@ -75,6 +75,12 @@ module.exports = () => ({
                     })
 
                     return texture
+                }
+
+                export const prepare = (callback) => {
+                    resizeCanvas(gl, callback)
+
+                    return gl
                 }
 
                 export default program

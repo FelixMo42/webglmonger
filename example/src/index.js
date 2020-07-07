@@ -1,12 +1,10 @@
 import {
+    prepare,
     setScreenResolution,
     setSpriteShape, 
     setVertexPosition,
     setTexture, loadTexture,
-    gl
 } from "./prog/main.glm"
-
-import { resizeGlCanvas } from "rollup-plugin-webgl/lib/canvas"
 
 // set up the attributes that are passed to the vertex shader
 setVertexPosition(new Float32Array([
@@ -15,9 +13,21 @@ setVertexPosition(new Float32Array([
 ]))
 
 const scene = []
+const texture1 = loadTexture("assets/texture1.png")
+const texture2 = loadTexture("assets/texture2.png")
 
-function render() {
-    resizeGlCanvas(gl)
+const Sprite = (tex, x, y, w, h) => ({
+    texture: tex,
+    shape: new Float32Array([ x, y, w, h ]),
+})
+
+scene.push( Sprite(texture1, -50, -50, 100, 100) )
+scene.push( Sprite(texture2, 100, 100, 100, 100) )
+
+// render()
+
+const render = () => {
+    let gl = prepare()
 
     // clear the canvas
     gl.clearColor(0, 0, 0, 1)
@@ -37,19 +47,7 @@ function render() {
         gl.drawArrays(gl.TRIANGLES, 0, 6)
     }
 
-    //redraw
     requestAnimationFrame(render)
 }
-
-const texture1 = loadTexture("assets/texture1.png")
-const texture2 = loadTexture("assets/texture2.png")
-
-const Sprite = (tex, x, y, w, h) => ({
-    texture: tex,
-    shape: new Float32Array([ x, y, w, h ]),
-})
-
-scene.push( Sprite(texture1, -50, -50, 100, 100) )
-scene.push( Sprite(texture2, 100, 100, 100, 100) )
 
 render()
