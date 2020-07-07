@@ -1,9 +1,9 @@
 import program, {
     setScreenResolution,
     setSpriteShape,
-    vertexPosition
+    setVertexPosition
 } from "./prog/main.glm"
-import { initAttribute } from "webglmonger/src/boilerplate"
+
 import { resizeGlCanvas } from "webglmonger/src/canvas"
 import { loadTexture } from "webglmonger/src/texture"
 import gl from "webglmonger"
@@ -12,7 +12,7 @@ const vao = gl.createVertexArray()
 gl.bindVertexArray(vao)
 
 // set up the attributes that are passed to the vertex shader
-initAttribute(vertexPosition, new Float32Array([
+setVertexPosition(new Float32Array([
     1,1 , 1,0 , 0,0 ,
     1,1 , 0,1 , 0,0 ,
 ]))

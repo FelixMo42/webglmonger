@@ -18,5 +18,5 @@ void main() {
     0, 1);
 
     // pass the texcoord to the fragment shader.
-    v_texcoord = a_position;
+    v_texcoord = vertexPosition;
 }
