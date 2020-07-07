@@ -33,10 +33,10 @@ module.exports = () => ({
 
             let data = {
                 parameters,
-                attributes : getAttributes(id, parameters["vert"]),
+                attributes : getAttributes(id, parameters.vert),
                 unifroms : [
-                    ...getUniforms(id, parameters["vert"]),
-                    ...getUniforms(id, parameters["frag"])
+                    ...getUniforms(id, parameters.vert),
+                    ...getUniforms(id, parameters.frag)
                 ]
             }
 
@@ -63,8 +63,7 @@ module.exports = () => ({
                 ({ attributes }) => attributes.map(makeAttribute).join("\n"),
                 ({ unifroms }) => unifroms.map(makeUniform).join("\n"),
 
-                require("./modules/texture"),
-                require("./modules/canvas"),
+                ...parameters.inculde.map(module => require(`rollup-plugin-webgl/modules/${module}`))
             ]
 
             return modules.map(func => func(data)).join("\n")
